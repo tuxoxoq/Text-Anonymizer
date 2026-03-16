@@ -1,0 +1,13 @@
+{
+  "name": "Ruby Text-Anonymizer",
+  "image": "mcr.microsoft.com/devcontainers/ruby:1-3.3-bookworm",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "rebornix.Ruby",
+        "castwide.solargraph",
+        "misogi.ruby-rubocop"
+      ]
+    }
+  }
+}
