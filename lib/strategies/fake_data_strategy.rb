@@ -9,7 +9,7 @@ class FakeDataStrategy < BaseStrategy
     when :ip
       Faker::Internet.ip_v4_address
     when :phone 
-      # Жестко задаем русский формат телефона случайными цифрами. Никаких точек!
+     
       "+7 (9#{rand(10..99)}) #{rand(100..999)}-#{rand(10..99)}-#{rand(10..99)}"
     else 
       "[REDACTED]"
