@@ -1,26 +1,23 @@
 require_relative 'base_strategy'
-
+require 'faker'
 class FakeDataStrategy < BaseStrategy
-  FIRST_NAMES = %w[Александр Дмитрий Максим Артем Иван Михаил Сергей Николай Алексей Андрей].freeze
-  LAST_NAMES  = %w[Иванов Петров Сидоров Смирнов Кузнецов Попов Васильев Соколов Новиков Волков].freeze
-  
-  LATIN_LOGINS = %w[alex dmitry max artem ivan mikhail sergey nick alexey andrew vova].freeze
-  FAKE_DOMAINS = %w[example.com mail.test anon.org hidden.ru].freeze
+  def initialize 
+    Faker::Config.locale = 'ru'
+  end
 
   def call(match, type)
     case type
     when :name
-      "#{FIRST_NAMES.sample} #{LAST_NAMES.sample}"
+      Faker::Name.name
     
     when :email
-      
-      "#{LATIN_LOGINS.sample}#{rand(10..99)}@#{FAKE_DOMAINS.sample}"
+      Faker::Internet.email
       
     when :ip 
-      Array.new(4) { rand(0..255) }.join('.')
+      Faker::Internet.ip_v4_address
     
     when :phone 
-      "+7 (9#{rand(10..99)}) #{rand(100..999)}-#{rand(10..99)}-#{rand(10..99)}"
+      Faker::PhoneNumber.cell_phone_in_e164
     
     when :color 
       match

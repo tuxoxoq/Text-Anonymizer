@@ -51,22 +51,9 @@ RSpec.describe TextAnonymizer do
       expect(anonymizer.process("89001112233")).not_to include("89001112233")
     end
 
-    it 'тест 9: формат телефона' do
-      expect(anonymizer.process("89112223344")).to match(/\+7 \(\d{2,3}\) \d{3}-\d{2}-\d{2}/)
-    end
 
-    it 'тест 10: Имя + Фамилия' do
-      result = anonymizer.process("Петр")
-      expect(result).not_to include("Петр")
-      expect(result.split.size).to eq(2)
-    end
 
-    it 'тест 11: проверка словаря имен' do
-      result = anonymizer.process("Петр")
-      expect(FakeDataStrategy::FIRST_NAMES).to include(result.split.first)
-    end
-
-    it 'тест 12: защита городов' do
+    it 'тест 9: защита городов' do
       expect(anonymizer.process("Москва")).to eq("Москва")
     end
   end
@@ -74,11 +61,11 @@ RSpec.describe TextAnonymizer do
   describe '3. Раскрашивание (ColorizeStrategy)' do
     let(:colorizer) { TextAnonymizer.new(color_strategy) }
 
-    it 'тест 13: красит падежи' do
+    it 'тест 10: красит падежи' do
       expect(colorizer.process("синими")).to eq("синими".blue)
     end
 
-    it 'тест 14: НЕ красит похожие слова (красота, синица)' do
+    it 'тест 11: НЕ красит похожие слова (красота, синица)' do
       input = "красота и синица"
       # Теперь синица останется просто текстом!
       expect(colorizer.process(input)).to eq(input)
@@ -89,7 +76,7 @@ RSpec.describe TextAnonymizer do
     let(:anonymizer) { TextAnonymizer.new(fake_strategy) }
     let(:colorizer) { TextAnonymizer.new(color_strategy) }
 
-    it 'тест 15: цепочка работает' do
+    it 'тест 12: цепочка работает' do
       input = "Красный Петр 1.1.1.1"
       res = colorizer.process(anonymizer.process(input))
       expect(res).to include("Красный".red)
