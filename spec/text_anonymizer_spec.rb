@@ -31,7 +31,7 @@ RSpec.describe TextAnonymizer do
       result = anonymizer.process("почта: user@mail.ru")
       email_part = result.split.last
       expect(email_part).not_to include("user@mail.ru")
-      # Проверяем на кириллицу ТОЛЬКО часть с почтой
+      
       expect(email_part).not_to match(/[а-яё]/i)
     end
 
