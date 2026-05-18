@@ -7,3 +7,5 @@ group :development, :test do
   gem 'rspec'
 end
 gem "telegram-bot-ruby", "~> 2.7"
+
+gem "docx", "~> 0.10.0"
